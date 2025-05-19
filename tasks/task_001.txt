@@ -1,0 +1,25 @@
+# Task ID: 1
+# Title: Project Setup with Next.js and TypeScript
+# Status: done
+# Dependencies: None
+# Priority: high
+# Description: Initialize the project with Next.js 14, TypeScript, and configure essential development tools and dependencies.
+# Details:
+1. Create a new Next.js project with TypeScript: `npx create-next-app@latest --typescript`
+2. Configure ESLint and Prettier for code quality
+3. Set up directory structure following Next.js best practices:
+   - `/app` for route components
+   - `/components` for reusable UI components
+   - `/lib` for utility functions
+   - `/types` for TypeScript interfaces
+4. Install core dependencies:
+   - React 18
+   - React Query
+   - React Hook Form + Zod
+   - Tailwind CSS
+   - Shadcn/ui
+5. Configure TypeScript with strict mode
+6. Set up environment variables structure (.env.local, .env.example)
+
+# Test Strategy:
+Verify project structure and configuration by running `npm run dev` and ensuring the development server starts without errors. Check TypeScript compilation with `npm run build` to ensure no type errors.

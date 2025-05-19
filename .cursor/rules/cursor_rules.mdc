@@ -1,0 +1,216 @@
+---
+description: Guidelines for creating and maintaining Cursor rules to ensure consistency and effectiveness.
+globs: .cursor/rules/*.mdc
+alwaysApply: true
+---
+
+- **Required Rule Structure:**
+  ```markdown
+  ---
+  description: Clear, one-line description of what the rule enforces
+  globs: path/to/files/*.ext, other/path/**/*
+  alwaysApply: boolean
+  ---
+
+  - **Main Points in Bold**
+    - Sub-points with details
+    - Examples and explanations
+  ```
+
+- **File References:**
+  - Use `[filename](mdc:path/to/file)` ([filename](mdc:filename)) to reference files
+  - Example: [prisma.mdc](mdc:.cursor/rules/prisma.mdc) for rule references
+  - Example: [schema.prisma](mdc:prisma/schema.prisma) for code references
+
+- **Code Examples:**
+  - Use language-specific code blocks
+  ```typescript
+  // ✅ DO: Show good examples
+  const goodExample = true;
+  
+  // ❌ DON'T: Show anti-patterns
+  const badExample = false;
+  ```
+
+- **Rule Content Guidelines:**
+  - Start with high-level overview
+  - Include specific, actionable requirements
+  - Show examples of correct implementation
+  - Reference existing code when possible
+  - Keep rules DRY by referencing other rules
+
+- **Rule Maintenance:**
+  - Update rules when new patterns emerge
+  - Add examples from actual codebase
+  - Remove outdated patterns
+  - Cross-reference related rules
+
+- **Best Practices:**
+  - Use bullet points for clarity
+  - Keep descriptions concise
+  - Include both DO and DON'T examples
+  - Reference actual code over theoretical examples
+  - Use consistent formatting across rules 
+
+
+---
+description: Restrict Cursor AI from installing new packages, performing database setup, and limit operations to the current directory.
+alwaysApply: true
+---
+
+<root>
+  <section name="🚫 Package Management Restrictions">
+    <restriction>
+      Cursor AI must <strong>not</strong> update existing ones.
+    </restriction>
+    <suggestion>
+      Any suggestions for package additions or updates should be presented as comments or recommendations, not executed actions.
+    </suggestion>
+  </section>
+
+  <section name="🗄️ Database Setup Restrictions">
+    <restriction>
+      Cursor AI must <strong>not</strong> perform any database setup, including schema design, migrations, or configuration.
+    </restriction>
+    <suggestion>
+      Any database-related suggestions should be presented as comments or recommendations, not executed actions.
+    </suggestion>
+  </section>
+
+  <section name="📁 Directory Scope Limitations">
+    <restriction>
+      Cursor AI should operate <strong>only within the library-management-system project directory</strong>.
+    </restriction>
+    <restriction>
+      Cursor AI must <strong>not</strong> read from or write to files outside this directory.
+    </restriction>
+    <restriction>
+      All file operations should be confined to the project's root and its subdirectories.
+    </restriction>
+  </section>
+
+  <section name="✅ Task Completion Verification Workflow">
+    <subsection name="Post-Acceptance Check">
+      After any code change is accepted, Cursor AI must immediately review the current task list of task-master to assess the status of the task associated with the change.
+    </subsection>
+    
+    <subsection name="Task Status Evaluation">
+      <evaluation>
+        If the task is marked as completed:
+        <action>Proceed to the next pending task in the list.</action>
+      </evaluation>
+      <evaluation>
+        If the task is not marked as completed:
+        <action>Continue working on the current task until it meets the completion criteria.</action>
+      </evaluation>
+    </subsection>
+
+    <subsection name="Task List Management">
+      <management>
+        Update the task list to reflect the current status of tasks accurately.
+      </management>
+      <management>
+        Ensure that completed tasks are appropriately marked to prevent redundant work.
+      </management>
+    </subsection>
+
+    <subsection name="Consistency Assurance">
+      <check>
+        Before moving to a new task, confirm that all acceptance criteria for the current task are fully met.
+      </check>
+      <check>
+        Avoid initiating new tasks if the current task remains incomplete.
+      </check>
+    </subsection>
+  </section>
+
+  <section name="🖥️ Terminal Command Execution Policy">
+    <restriction>
+      Cursor AI must <strong>not</strong> execute any terminal commands automatically.
+    </restriction>
+    <suggestion>
+      When a terminal command is required (e.g., for installation, running scripts, or other operations), Cursor AI should provide the command as a suggestion or comment.
+    </suggestion>
+    <responsibility>
+      The responsibility to execute any terminal commands lies solely with the developer.
+    </responsibility>
+  </section>
+
+  <metadata>
+    <description>Instruct Cursor AI to suggest terminal commands without executing them.</description>
+    <alwaysApply>true</alwaysApply>
+  </metadata>
+</root>
+
+<root>
+  <section name="🧶 YARN Package Management Policy">
+    <restriction>
+      Cursor AI must use <strong>YARN</strong> as the package manager for managing dependencies.
+    </restriction>
+    <suggestion>
+      Any package management tasks, such as installations or updates, should be suggested using YARN commands.
+    </suggestion>
+    <responsibility>
+      The responsibility to execute YARN commands lies solely with the developer.
+    </responsibility>
+  </section>
+
+  <metadata>
+    <description>Instruct Cursor AI to suggest YARN commands for package management without executing them.</description>
+    <alwaysApply>true</alwaysApply>
+  </metadata>
+</root>
+
+<root>
+  <section name="🧶 YARN Package Management and Build Process">
+    <restriction>
+      Windsurf must use <strong>YARN</strong> as the package manager for managing dependencies.
+    </restriction>
+    <suggestion>
+      Any package management tasks, such as installations or updates, should be suggested using YARN commands.
+    </suggestion>
+    <responsibility>
+      The responsibility to execute YARN commands lies solely with the developer.
+    </responsibility>
+
+    <subsection name="Task Completion and Build Verification">
+      <instruction>
+        After completing any task, Windsurf should recommend running <strong>yarn build</strong> to ensure that the application builds successfully.
+      </instruction>
+      <suggestion>
+        The developer should run <strong>yarn build</strong> after each task to verify that the application builds correctly and no issues exist.
+      </suggestion>
+      <check>
+        If the build fails, the developer should address any issues before proceeding to the next task.
+      </check>
+      <subsection name="Post-Task Completion Verification">
+        <instruction>
+          After each task is completed, Windsurf must review the current task list in the Task Master.
+        </instruction>
+        <evaluation>
+          If the task is marked as completed:
+          <action>Proceed to the next pending task in the list.</action>
+        </evaluation>
+        <evaluation>
+          If the task is not marked as completed:
+          <action>Continue working on the current task until it meets the completion criteria.</action>
+        </evaluation>
+      </subsection>
+      <subsection name="Task List Update">
+        <management>
+          Update the task list to reflect the current status of tasks accurately after each task completion.
+        </management>
+        <management>
+          Ensure that completed tasks are appropriately marked in Task Master to avoid redundant work.
+        </management>
+      </subsection>
+    </subsection>
+  </section>
+
+  <metadata>
+    <description>Instruct Cursor AI to suggest YARN commands for package management and to recommend building the application using 'yarn build' after each task. The task completion must be verified in Task Master before proceeding with the next task.</description>
+    <alwaysApply>true</alwaysApply>
+  </metadata>
+</root>
+
+

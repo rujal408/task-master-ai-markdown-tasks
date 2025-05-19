@@ -1,0 +1,259 @@
+<context>
+# Overview  
+The Library Management System is a modern web application designed to automate and streamline library operations. It provides librarians with powerful tools to manage books, members, and transactions efficiently while offering members a seamless experience for discovering and borrowing books. The system will be built using Next.js, providing a responsive and user-friendly interface.
+
+# Core Features  
+1. **User Management**
+   - Secure authentication system with role-based access control (Admin, Librarian, Member)
+   - User profile management and password reset functionality
+   - Important for maintaining security and proper access levels
+
+2. **Book Management**
+   - Comprehensive CRUD operations for book records
+   - Advanced search with filtering by categories, tags, and availability
+   - ISBN validation and book status tracking
+   - Book cover image management
+
+3. **Member Management**
+   - Member registration and profile management
+   - Membership status tracking and history
+   - Search and filter members efficiently
+
+4. **Borrowing System**
+   - Streamlined book checkout and return processes
+   - Automated due date and fine calculations
+   - Book reservation system
+   - Overdue notifications
+
+5. **Reporting & Analytics**
+   - Inventory and transaction reports
+   - Member activity analytics
+   - Fine collection and overdue tracking
+   - Popular books and usage statistics
+
+# User Experience  
+## User Personas
+1. **Librarian**
+   - Primary user managing daily operations
+   - Needs efficient tools for book and member management
+   - Requires quick access to reports and analytics
+
+2. **Library Member**
+   - Wants to easily search and borrow books
+   - Needs self-service options for account management
+   - Values notifications for due dates and reservations
+
+## Key User Flows
+1. **Book Checkout Flow**
+   - Member searches for a book
+   - Views availability and checks out
+   - Receives due date confirmation
+
+2. **Member Registration Flow**
+   - New member fills registration form
+   - Account verification
+   - Welcome email with login details
+
+3. **Report Generation Flow**
+   - Librarian selects report type and parameters
+   - System generates and displays report
+   - Option to export in multiple formats
+
+## UI/UX Considerations
+- Responsive design for all device sizes
+- Intuitive navigation and search functionality
+- Clear visual hierarchy and feedback mechanisms
+- Accessibility compliance (WCAG 2.1)
+- Dark/light mode support
+</context>
+
+<PRD>
+# Technical Architecture  
+## System Components
+1. **Frontend**
+   - Next.js with TypeScript
+   - React Query for data fetching
+   - React Hook Form + Zod for form handling
+   - Shadcn/ui component library
+   - Tailwind CSS for styling
+
+2. **Backend**
+   - Next.js API routes
+   - Prisma ORM for database operations
+   - JWT for authentication
+   - AWS S3 for file storage
+
+3. **Database**
+   - PostgreSQL for relational data
+   - Prisma migrations for schema management
+   - Optimized indexes for search performance
+
+## Data Models
+1. **User**
+   - id, email, passwordHash, role, name, status
+   - Relations: transactions, reservations
+
+2. **Book**
+   - id, isbn, title, author, category, status
+   - Relations: transactions, reservations
+
+3. **Transaction**
+   - id, bookId, userId, checkoutDate, dueDate, returnDate, fine
+   - Relations: book, user
+
+4. **Reservation**
+   - id, bookId, userId, reservationDate, status
+   - Relations: book, user
+
+## APIs
+1. **Auth**
+   - POST /api/auth/register
+   - POST /api/auth/login
+   - POST /api/auth/forgot-password
+
+2. **Books**
+   - GET /api/books
+   - POST /api/books
+   - GET /api/books/:id
+   - PUT /api/books/:id
+   - DELETE /api/books/:id
+
+3. **Members**
+   - GET /api/members
+   - POST /api/members
+   - GET /api/members/:id
+   - PUT /api/members/:id
+
+4. **Transactions**
+   - POST /api/transactions/checkout
+   - POST /api/transactions/return
+   - GET /api/transactions/overdue
+
+## Infrastructure
+- Vercel for hosting
+- PostgreSQL database
+- AWS S3 for file storage
+- GitHub Actions for CI/CD
+- Sentry for error tracking
+
+# Development Roadmap  
+## Phase 1: Core Infrastructure (Weeks 1-2)
+- Project setup with Next.js and TypeScript
+- Authentication system
+- Database schema and migrations
+- Basic UI components and theme
+- CI/CD pipeline
+
+## Phase 2: Book Management (Weeks 3-4)
+- Book CRUD operations
+- Search and filtering
+- Book cover upload
+- ISBN validation
+- Basic reporting
+
+## Phase 3: Member Management (Weeks 5-6)
+- Member registration and profiles
+- Role-based access control
+- Member search and filtering
+- Account management
+
+## Phase 4: Borrowing System (Weeks 7-8)
+- Checkout/return workflows
+- Due date calculation
+- Fine system
+- Email notifications
+- Reservation system
+
+## Phase 5: Reporting & Analytics (Weeks 9-10)
+- Inventory reports
+- Transaction history
+- Member activity
+- Fine collection
+- Export functionality
+
+## Phase 6: Polish & Optimization (Weeks 11-12)
+- Performance optimization
+- Accessibility improvements
+- Mobile responsiveness
+- User testing
+- Bug fixes
+
+# Logical Dependency Chain
+1. **Foundation Layer**
+   - Authentication system
+   - Database schema
+   - Basic UI components
+   - API infrastructure
+
+2. **Core Functionality**
+   - Book management
+   - Member management
+   - Basic transactions
+
+3. **Advanced Features**
+   - Advanced search
+   - Reporting
+   - Notifications
+   - Analytics
+
+4. **Polish & Optimization**
+   - Performance
+   - Accessibility
+   - User experience
+   - Testing
+
+# Risks and Mitigations  
+1. **Technical Challenges**
+   - Risk: Complex transaction handling
+   - Mitigation: Implement comprehensive transaction management
+   - Risk: Performance with large datasets
+   - Mitigation: Implement pagination and efficient queries
+
+2. **Scope Management**
+   - Risk: Feature creep
+   - Mitigation: Strict adherence to MVP scope
+   - Risk: Integration complexity
+   - Mitigation: Clear API contracts and testing
+
+3. **Resource Constraints**
+   - Risk: Limited development resources
+   - Mitigation: Prioritize must-have features
+   - Risk: Time constraints
+   - Mitigation: Agile development with regular reviews
+
+# Appendix  
+## Technology Stack
+- **Frontend**: Next.js 14, TypeScript, React 18
+- **Styling**: Tailwind CSS, Shadcn/ui
+- **State Management**: React Query, Zustand
+- **Form Handling**: React Hook Form, Zod
+- **Database**: PostgreSQL, Prisma ORM
+- **Authentication**: NextAuth.js, JWT
+- **Storage**: AWS S3
+- **Testing**: Jest, React Testing Library
+- **CI/CD**: GitHub Actions
+- **Monitoring**: Sentry
+
+## Performance Targets
+- Page load < 2s
+- API response time < 500ms
+- Support 100 concurrent users
+- 99.9% uptime
+
+## Security Measures
+- JWT token-based authentication
+- Role-based access control
+- Input validation
+- Rate limiting
+- CORS policy
+- Secure headers
+- Regular security audits
+
+## Accessibility Standards
+- WCAG 2.1 AA compliance
+- Keyboard navigation
+- Screen reader support
+- Color contrast ratios
+- ARIA labels
+- Focus management
+</PRD>

@@ -1,0 +1,21 @@
+# Task ID: 17
+# Title: Due Date and Fine Calculation System
+# Status: pending
+# Dependencies: 14
+# Priority: high
+# Description: Implement the system for calculating due dates for borrowed books and fines for late returns.
+# Details:
+1. Create utility functions for:
+   - Due date calculation based on book type and member status
+   - Fine calculation based on days overdue
+   - Grace period handling
+2. Implement configuration system for fine rates and loan periods
+3. Create database queries for overdue items
+4. Implement fine payment tracking
+5. Create fine waiver functionality for librarians
+6. Add reporting for fine collection
+7. Implement automatic fine calculation on return
+8. Create notification triggers for approaching due dates
+
+# Test Strategy:
+Test due date calculation with various book types and member statuses. Verify fine calculation for different overdue periods. Test edge cases like holidays and weekends. Verify fine payment and waiver functionality. Test reporting accuracy.

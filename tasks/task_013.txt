@@ -1,0 +1,30 @@
+# Task ID: 13
+# Title: Member Management UI Components
+# Status: done
+# Dependencies: 4, 7
+# Priority: high
+# Description: Create Next.js UI components for member management including list view, detail view, and forms for adding and editing members.
+# Details:
+1. Create member list component with:
+   - Table/grid view with pagination
+   - Sorting options for different columns
+   - Visual status indicators for different membership types
+   - Quick action buttons (view, edit, manage)
+2. Implement member detail view component showing:
+   - Personal information section with profile display
+   - Membership details card with status badge
+   - Current borrows tab with return dates
+   - Reservation history in timeline format
+   - Fine history with payment status
+3. Create member registration form with:
+   - Multi-step registration process
+   - Form validation using React Hook Form + Zod
+   - Membership type selection
+4. Implement member edit form with:
+   - Inline editing capabilities
+   - Status change confirmation dialogs
+5. Add loading skeletons and error states
+6. Implement responsive design for all components
+
+# Test Strategy:
+Test UI components with various data scenarios. Verify form validation and submission. Ensure responsive design works across device sizes. Test loading states and error handling. Verify proper display of member history and status.

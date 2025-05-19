@@ -1,0 +1,244 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// User model for authentication and authorization
+model User {
+  id                  String               @id @default(uuid())
+  email               String               @unique
+  passwordHash        String
+  name                String?
+  phoneNumber         String?              @db.VarChar(20)
+  address             String?              @db.Text
+  status              UserStatus           @default(ACTIVE)
+  role                UserRole             @default(USER)
+  userRoles           UserRoleMapping[]
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
+  deletedAt           DateTime?            @map("deleted_at")
+  transactions        Transaction[]
+  reservations        Reservation[]
+  passwordResetTokens PasswordResetToken[]
+
+  @@index([email], name: "user_email_idx")
+  @@index([status], name: "user_status_idx")
+  @@map("users")
+}
+
+// User role mapping for many-to-many relationship
+model UserRoleMapping {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role      UserRole
+  roleData  Role     @relation(fields: [role], references: [name])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, role])
+  @@map("user_role_mappings")
+}
+
+// Role permissions for fine-grained access control
+model RolePermission {
+  id         String     @id @default(uuid())
+  role       UserRole
+  roleRef    Role       @relation(fields: [role], references: [name], onDelete: Cascade)
+  permission Permission
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+
+  @@unique([role, permission])
+  @@index([role])
+  @@map("role_permissions")
+}
+
+// User status enum
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+  PENDING_VERIFICATION
+}
+
+// Book model for library inventory
+model Book {
+  id            String        @id @default(uuid())
+  isbn          String        @unique @db.VarChar(17) // Supports ISBN-13 with hyphens
+  title         String
+  author        String
+  category      String
+  edition       String?       @db.VarChar(50)
+  language      String?       @default("English") @db.VarChar(50)
+  pageCount     Int?
+  status        BookStatus    @default(AVAILABLE)
+  publishedYear Int?
+  publisher     String?
+  description   String?       @db.Text
+  coverImage    String?       @db.Text
+  tags          String[]      @default([])
+  isDeleted     Boolean       @default(false)
+  deletedAt     DateTime?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  transactions  Transaction[]
+  reservations  Reservation[]
+
+  @@index([title], name: "book_title_idx")
+  @@index([author], name: "book_author_idx")
+  @@index([category], name: "book_category_idx")
+  @@index([isbn], name: "book_isbn_idx")
+  @@index([status], name: "book_status_idx")
+  @@map("books")
+}
+
+// Transaction model for book checkouts and returns
+model Transaction {
+  id           String            @id @default(uuid())
+  bookId       String
+  book         Book              @relation(fields: [bookId], references: [id])
+  userId       String
+  user         User              @relation(fields: [userId], references: [id])
+  checkoutDate DateTime          @default(now())
+  dueDate      DateTime
+  returnDate   DateTime?
+  fine         Float             @default(0)
+  status       TransactionStatus @default(CHECKED_OUT)
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+
+  @@index([bookId], name: "transaction_book_idx")
+  @@index([userId], name: "transaction_user_idx")
+  @@index([status], name: "transaction_status_idx")
+  @@map("transactions")
+}
+
+// Reservation model for book holds
+model Reservation {
+  id              String            @id @default(uuid())
+  bookId          String
+  book            Book              @relation(fields: [bookId], references: [id])
+  userId          String
+  user            User              @relation(fields: [userId], references: [id])
+  reservationDate DateTime          @default(now())
+  expiryDate      DateTime
+  status          ReservationStatus @default(PENDING)
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  @@index([bookId], name: "reservation_book_idx")
+  @@index([userId], name: "reservation_user_idx")
+  @@index([status], name: "reservation_status_idx")
+  @@map("reservations")
+}
+
+// Password reset token for secure password reset functionality
+model PasswordResetToken {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  expiresAt DateTime
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  used      Boolean  @default(false)
+
+  @@index([token], name: "reset_token_idx")
+  @@map("password_reset_tokens")
+}
+
+// Enums for roles and permissions
+enum UserRole {
+  USER
+  ADMIN
+  LIBRARIAN
+  MEMBER
+}
+
+// Fine-grained permissions
+enum Permission {
+  // User permissions
+  USER_CREATE
+  USER_READ
+  USER_UPDATE
+  USER_DELETE
+  USER_MANAGE_ROLES
+  USER_UPDATE_PASSWORD
+  // Book permissions
+  BOOK_CREATE
+  BOOK_READ
+  BOOK_UPDATE
+  BOOK_DELETE
+  BOOK_MANAGE_CATEGORIES
+
+  // Transaction permissions
+  TRANSACTION_CREATE
+  TRANSACTION_READ
+  TRANSACTION_UPDATE
+  TRANSACTION_DELETE
+  TRANSACTION_OVERRIDE
+
+  // Reservation permissions
+  RESERVATION_CREATE
+  RESERVATION_READ
+  RESERVATION_UPDATE
+  RESERVATION_DELETE
+
+  // Report permissions
+  REPORT_VIEW
+  REPORT_GENERATE
+  REPORT_EXPORT
+
+  // System permissions
+  SYSTEM_SETTINGS_UPDATE
+  SYSTEM_MAINTENANCE
+}
+
+// Role model to store role metadata
+model Role {
+  name        UserRole          @id @unique
+  description String?           @db.VarChar(255)
+  isSystem    Boolean           @default(false)
+  permissions RolePermission[]
+  userRoles   UserRoleMapping[]
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  @@index([isSystem], name: "role_system_idx")
+  @@map("roles")
+}
+
+enum BookStatus {
+  AVAILABLE
+  CHECKED_OUT
+  RESERVED
+  LOST
+  DAMAGED
+  UNDER_MAINTENANCE
+  DISCARDED
+}
+
+enum TransactionStatus {
+  CHECKED_OUT
+  RETURNED
+  OVERDUE
+  LOST
+  DAMAGED
+  CLAIMED_RETURNED
+}
+
+enum ReservationStatus {
+  PENDING
+  FULFILLED
+  CANCELLED
+  EXPIRED
+  READY_FOR_PICKUP
+}

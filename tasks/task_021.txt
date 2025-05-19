@@ -1,0 +1,22 @@
+# Task ID: 21
+# Title: Reporting System - Fine Collection Reports
+# Status: pending
+# Dependencies: 17, 20
+# Priority: medium
+# Description: Implement reporting functionality for fine collection, overdue tracking, and financial summaries.
+# Details:
+1. Create API endpoints for fine collection reports
+2. Implement database queries for:
+   - Fine collection by period
+   - Outstanding fines
+   - Waived fines
+   - Fine trends
+3. Create UI components for report display
+4. Implement filtering by date range and other parameters
+5. Add data visualization with charts and graphs
+6. Create export functionality (CSV, PDF)
+7. Implement financial summaries
+8. Add print-friendly formatting
+
+# Test Strategy:
+Test report generation with various parameters and date ranges. Verify financial calculations against transaction records. Test export functionality in different formats. Ensure proper formatting for printed reports. Verify visualization accuracy.

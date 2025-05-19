@@ -1,0 +1,22 @@
+# Task ID: 19
+# Title: Reporting System - Inventory Reports
+# Status: done
+# Dependencies: 9, 10
+# Priority: medium
+# Description: Implement inventory reporting functionality to track book status, availability, and collection statistics.
+# Details:
+1. Create API endpoints for inventory reports
+2. Implement database queries for:
+   - Total collection statistics
+   - Books by category/status
+   - New acquisitions
+   - Lost/damaged books
+3. Create UI components for report display
+4. Implement filtering and parameter selection
+5. Add data visualization with charts and graphs
+6. Create export functionality (CSV, PDF)
+7. Implement scheduled report generation
+8. Add print-friendly formatting
+
+# Test Strategy:
+Test report generation with various parameters. Verify data accuracy against database. Test export functionality in different formats. Ensure proper formatting for printed reports. Verify visualization accuracy.

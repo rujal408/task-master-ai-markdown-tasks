@@ -1,0 +1,36 @@
+# Task ID: 15
+# Title: Borrowing System UI Implementation
+# Status: done
+# Dependencies: 10
+# Priority: high
+# Description: Create Next.js UI components for the book borrowing system including checkout wizard, return process, and transaction history views.
+# Details:
+1. Create checkout wizard UI with steps:
+   - Book selection page with search/scan functionality
+   - Member selection with quick search
+   - Due date selection with calendar component
+   - Checkout summary and confirmation screen
+2. Implement return process UI:
+   - Book return scanner/search interface
+   - Condition assessment form
+   - Fine calculation display with breakdown
+   - Payment collection interface (if applicable)
+3. Design transaction history dashboard:
+   - Filterable transaction table
+   - Date range selector
+   - Export options (PDF, CSV)
+4. Create transaction detail modal/page with:
+   - Complete transaction information
+   - Status timeline
+   - Related book and member information
+5. Add interactive dashboard widgets:
+   - Recent transactions list with status indicators
+   - Overdue items alerts with action buttons
+   - Book popularity chart
+6. Implement receipt generation with:
+   - Printable layout
+   - Email sending interface
+   - QR code for digital receipt
+
+# Test Strategy:
+Test checkout and return flows with various scenarios. Test responsive design across device sizes. Verify print and email functionality. Test filtering and sorting in transaction history. Ensure accessibility for all user interfaces.

@@ -1,0 +1,22 @@
+# Task ID: 2
+# Title: Setup Database and Prisma ORM
+# Status: done
+# Dependencies: 1
+# Priority: high
+# Description: Configure PostgreSQL database and set up Prisma ORM with initial schema and migrations.
+# Details:
+1. Install Prisma: `npm install prisma @prisma/client`
+2. Initialize Prisma: `npx prisma init`
+3. Configure PostgreSQL connection in .env file
+4. Define initial schema in schema.prisma for core models:
+   - User model with fields: id, email, passwordHash, role, name, status
+   - Book model with fields: id, isbn, title, author, category, status
+   - Transaction model with fields: id, bookId, userId, checkoutDate, dueDate, returnDate, fine
+   - Reservation model with fields: id, bookId, userId, reservationDate, status
+5. Define relationships between models
+6. Set up optimized indexes for search performance
+7. Create initial migration: `npx prisma migrate dev --name init`
+8. Generate Prisma client: `npx prisma generate`
+
+# Test Strategy:
+Verify database connection and schema by running `npx prisma db pull` to ensure the schema matches the database. Create test queries using Prisma Studio (`npx prisma studio`) to validate model relationships and constraints.

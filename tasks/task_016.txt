@@ -1,0 +1,27 @@
+# Task ID: 16
+# Title: Reservation System Implementation
+# Status: done
+# Dependencies: 9, 12, 14
+# Priority: medium
+# Description: Implement book reservation system allowing members to reserve books that are currently unavailable.
+# Details:
+1. Enhance Reservation model in Prisma schema if needed
+2. Create API routes for reservation operations:
+   - POST /api/reservations (create reservation)
+   - GET /api/reservations (list with filtering)
+   - PUT /api/reservations/:id (update status)
+   - DELETE /api/reservations/:id (cancel)
+3. Implement business logic for:
+   - Availability checking
+   - Reservation queue management
+   - Notification triggers
+   - Expiration handling
+4. Create UI components for:
+   - Reservation creation
+   - Reservation management
+   - Reservation queue display
+5. Implement reservation status workflow
+6. Add role-based access control to endpoints
+
+# Test Strategy:
+Test reservation creation, fulfillment, and cancellation flows. Verify queue management for multiple reservations. Test notification triggers. Ensure proper status updates for books and reservations. Test edge cases like reservation expiration.

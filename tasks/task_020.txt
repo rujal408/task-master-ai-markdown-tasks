@@ -1,0 +1,22 @@
+# Task ID: 20
+# Title: Reporting System - Transaction Reports
+# Status: done
+# Dependencies: 14, 15
+# Priority: medium
+# Description: Implement transaction reporting functionality to track borrowing patterns, popular books, and member activity.
+# Details:
+1. Create API endpoints for transaction reports
+2. Implement database queries for:
+   - Checkout/return statistics
+   - Popular books by period
+   - Member activity
+   - Overdue analysis
+3. Create UI components for report display
+4. Implement filtering by date range and other parameters
+5. Add data visualization with charts and graphs
+6. Create export functionality (CSV, PDF)
+7. Implement scheduled report generation
+8. Add print-friendly formatting
+
+# Test Strategy:
+Test report generation with various parameters and date ranges. Verify data accuracy against transaction records. Test export functionality in different formats. Ensure proper formatting for printed reports. Verify visualization accuracy.

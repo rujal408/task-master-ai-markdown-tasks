@@ -1,0 +1,25 @@
+# Task ID: 14
+# Title: Transaction Model and API Implementation
+# Status: done
+# Dependencies: 2, 9, 12
+# Priority: high
+# Description: Implement the Transaction model with Prisma and create API endpoints for book checkout and return processes.
+# Details:
+1. Enhance Transaction model in Prisma schema if needed
+2. Create API routes for transaction operations:
+   - POST /api/transactions/checkout (check out book to member)
+   - POST /api/transactions/return (return book)
+   - GET /api/transactions (list with filtering)
+   - GET /api/transactions/:id (get details)
+3. Implement business logic for:
+   - Due date calculation
+   - Availability checking
+   - Status updates for books
+   - Fine calculation for late returns
+4. Create database queries with Prisma
+5. Implement validation using Zod schemas
+6. Add role-based access control to endpoints
+7. Implement proper error handling and status codes
+
+# Test Strategy:
+Test checkout and return flows with various scenarios. Verify due date calculation and fine computation. Test edge cases like unavailable books and membership expiration. Ensure proper status updates for books and transactions.

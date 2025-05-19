@@ -1,0 +1,21 @@
+# Task ID: 3
+# Title: Authentication System Setup with NextAuth.js
+# Status: done
+# Dependencies: 1, 2
+# Priority: high
+# Description: Implement secure authentication with NextAuth.js, JWT, and role-based access control for Admin, Librarian, and Member roles.
+# Details:
+1. Install NextAuth.js: `npm install next-auth`
+2. Configure NextAuth.js with JWT provider
+3. Create authentication API routes:
+   - `/api/auth/[...nextauth].ts` for NextAuth.js configuration
+   - Define JWT strategy with custom callbacks
+4. Implement role-based access control middleware
+5. Create Prisma adapter for NextAuth.js
+6. Set up session management with secure cookies
+7. Implement protected routes based on user roles
+8. Create utility functions for checking authentication status and user roles
+9. Configure secure headers and CSRF protection
+
+# Test Strategy:
+Create test users with different roles and verify authentication flows. Test protected routes to ensure proper access control. Verify JWT token generation, validation, and expiration. Test session persistence across page reloads.

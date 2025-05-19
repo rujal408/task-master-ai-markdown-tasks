@@ -1,0 +1,33 @@
+# Task ID: 25
+# Title: Next.js Accessibility Enhancements
+# Status: pending
+# Dependencies: 4, 10, 13, 15
+# Priority: high
+# Description: Implement comprehensive accessibility features in the Next.js frontend to ensure WCAG 2.1 AA compliance with proper keyboard navigation, screen reader support, and focus management.
+# Details:
+1. Enhance component accessibility:
+   - Convert existing components to use semantic HTML elements
+   - Add appropriate ARIA attributes to custom components
+   - Implement accessible shadcn/ui component alternatives
+2. Improve keyboard navigation:
+   - Add focus indicators that meet contrast requirements
+   - Ensure logical tab order throughout the application
+   - Implement keyboard shortcuts for common actions
+   - Create skip links for main content sections
+3. Enhance screen reader support:
+   - Add descriptive aria-live regions for dynamic content
+   - Implement proper heading hierarchy for navigation
+   - Create accessible tables with proper headers and captions
+   - Add text alternatives for all interactive elements
+4. Implement accessibility hooks and utilities:
+   - Create useA11y custom hooks for focus management
+   - Build accessible dialog and modal components
+   - Implement toast and notification accessibility
+   - Add internationalization support for screen readers
+5. Add accessibility testing infrastructure:
+   - Configure Jest tests with axe-core for automated testing
+   - Add Cypress a11y testing with axe
+   - Create CI/CD checks for accessibility regressions
+
+# Test Strategy:
+Conduct accessibility audit using tools like Axe or Lighthouse. Test with screen readers (NVDA, VoiceOver). Verify keyboard-only navigation. Check color contrast with WCAG tools. Test with various assistive technologies.

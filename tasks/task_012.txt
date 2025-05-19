@@ -1,0 +1,27 @@
+# Task ID: 12
+# Title: Member Model and API Implementation
+# Status: done
+# Dependencies: 2, 3
+# Priority: high
+# Description: Implement the Member model with Prisma and create RESTful API endpoints for member management.
+# Details:
+1. Enhance User model in Prisma schema for member-specific fields:
+   - address
+   - phoneNumber
+   - membershipStartDate
+   - membershipEndDate
+   - membershipStatus
+   - borrowingLimit
+2. Create API routes for member operations:
+   - GET /api/members (with pagination, filtering)
+   - POST /api/members (create new member)
+   - GET /api/members/:id (get member details)
+   - PUT /api/members/:id (update member)
+3. Implement validation using Zod schemas
+4. Create database queries with Prisma
+5. Add role-based access control to endpoints
+6. Implement proper error handling and status codes
+7. Create member status management logic
+
+# Test Strategy:
+Test all API endpoints with valid and invalid data. Verify proper validation for member data. Test pagination and filtering functionality. Ensure proper error responses. Verify role-based access control for each endpoint.
